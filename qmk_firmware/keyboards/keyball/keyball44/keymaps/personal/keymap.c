@@ -47,9 +47,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default 
   // TODO set up navigation
   [navigation] = LAYOUT_universal(
-    KC_CONFIG_DVORAK , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
-    KC_CONFIG_QWERTY , _______ , _______ , _______ , _______ , _______ ,                                       _______ , KC_BTN1 , KC_BTN3 , _______ , KC_BTN2 , _______ ,
-    KC_CONFIG_GAMING , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    DF(dvorak) , AML_TO , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    DF(qwerty) , _______ , _______ , _______ , _______ , _______ ,                                       _______ , KC_BTN1 , KC_BTN3 , _______ , KC_BTN2 , _______ ,
+    DF(gaming) , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
              _______ , _______          , MO(navigation_mod) , _______ , _______ ,                  _______  , _______ , _______           , _______ , _______
   ),
 
@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_SCLN  , KC_COMM  , KC_DOT   , KC_P     , KC_Y     ,                                        KC_F     , KC_G     , KC_C     , KC_R     , KC_L     , _______  ,
     KC_TAB   , KC_A     , KC_O     , KC_E     , KC_U     , KC_I     ,                                        KC_D     , KC_H     , KC_T     , KC_N     , KC_S     , KC_MINS  ,
     KC_LSFT  , KC_QUOTE , KC_Q     , KC_J     , KC_K     , KC_X     ,                                        KC_B     , KC_M     , KC_W     , KC_V     , KC_Z     , KC_RSFT  ,
-               _______  , _______  , MO(dvorak_mod) , KC_SPC , _______ ,               KC_BSPC  , KC_ENT   , _______  , _______  , KC_CONFIG_NAVIGATION
+               _______  , _______  , MO(dvorak_mod) , KC_SPC , _______ ,                          KC_BSPC  , KC_ENT   , _______  , _______  , DF(navigation)
   ),
 
   [dvorak_mod] = LAYOUT_universal(
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
     KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , _______  ,
     KC_LSFT  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
-               _______  , _______  , MO(qwerty_mod)  , KC_SPC , _______ ,                          KC_BSPC , KC_ENT   , _______  , _______  , KC_CONFIG_NAVIGATION
+               _______  , _______  , MO(qwerty_mod)  , KC_SPC , _______ ,                          KC_BSPC , KC_ENT   , _______  , _______  , DF(navigation)
   ),
 
   [qwerty_mod] = LAYOUT_universal(
@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
     KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_BTN1  , KC_BTN3  , KC_BTN4  , KC_BTN2  , _______  ,
     KC_LSFT  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
-               _______  , _______  , MO(gaming_mod)  , KC_SPC , _______ ,                          KC_BSPC , KC_ENT   , _______  , _______  , KC_CONFIG_NAVIGATION
+               _______  , _______  , MO(gaming_mod)  , KC_SPC , _______ ,                          KC_BSPC , KC_ENT   , _______  , _______  , DF(navigation)
   ),
 
   [gaming_mod] = LAYOUT_universal(
@@ -117,27 +117,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         keyball_set_scroll_mode(false);
     }
     return state;
-}
-
-// Add the behaviour of this new keycode
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case KC_CONFIG_NAVIGATION:
-    case KC_CONFIG_DVORAK:
-    case KC_CONFIG_QWERTY:
-    case KC_CONFIG_GAMING:
-      // Our logic will happen on presses, nothing is done on releases
-      if (!record->event.pressed) {
-        // We've already handled the keycode (doing nothing), let QMK know so no further code is run unnecessarily
-        return false;
-      }
-      layer_move(keycode << 1);
-      return false;
-
-    // Process other keycodes normally
-    default:
-      return true;
-  }
 }
 
 #ifdef OLED_ENABLE
