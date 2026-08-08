@@ -24,36 +24,120 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // https://pseudocc.github.io/real-prog-dvorak/
 // https://docs.qmk.fm/keycodes_basic
 
+enum my_layers {
+  navigation = 0,
+  navigation_mod,
+  dvorak,
+  dvorak_mod,
+  qwerty,
+  qwerty_mod,
+  gaming,
+  gaming_mod,
+};
+
+enum my_keycodes {
+  KC_CONFIG_NAVIGATION = SAFE_RANGE,
+  KC_CONFIG_DVORAK,
+  KC_CONFIG_QWERTY,
+  KC_CONFIG_GAMING,
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  // keymap for default
-  [0] = LAYOUT_universal(
-    KC_ESC   , KC_SCLN  , KC_COMM  , KC_DOT   , KC_P     , KC_Y     ,                                        KC_F     , KC_G     , KC_C     , KC_R     , KC_L     , KC_BSPC  ,
+  // keymap for default 
+  // TODO set up navigation
+  [navigation] = LAYOUT_universal(
+    KC_CONFIG_DVORAK , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    KC_CONFIG_QWERTY , _______ , _______ , _______ , _______ , _______ ,                                       _______ , KC_BTN1 , KC_BTN3 , _______ , KC_BTN2 , _______ ,
+    KC_CONFIG_GAMING , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+             _______ , _______          , MO(navigation_mod) , _______ , _______ ,                  _______  , _______ , _______           , _______ , _______
+  ),
+
+  [navigation_mod] = LAYOUT_universal(
+    SSNP_FRE , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    SSNP_VRT , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    SSNP_VRT , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+               _______ , _______           , _______ , _______  , _______ ,                 _______  , _______           , _______ , _______ , _______
+  ),
+
+  [dvorak] = LAYOUT_universal(
+    KC_ESC   , KC_SCLN  , KC_COMM  , KC_DOT   , KC_P     , KC_Y     ,                                        KC_F     , KC_G     , KC_C     , KC_R     , KC_L     , _______  ,
     KC_TAB   , KC_A     , KC_O     , KC_E     , KC_U     , KC_I     ,                                        KC_D     , KC_H     , KC_T     , KC_N     , KC_S     , KC_MINS  ,
     KC_LSFT  , KC_QUOTE , KC_Q     , KC_J     , KC_K     , KC_X     ,                                        KC_B     , KC_M     , KC_W     , KC_V     , KC_Z     , KC_RSFT  ,
-               _______  , _______  , LCTL_T(KC_LNG2)  , LT(1,KC_SPC)    , LT(2,KC_LNG1)  ,                                 _______  , KC_ENT,     _______  , _______  , _______
+               _______  , _______  , MO(programmer_dvorak_mod) , KC_SPC , _______ ,               KC_BSPC  , KC_ENT   , _______  , _______  , KC_CONFIG_NAVIGATION
   ),
 
-  [1] = LAYOUT_universal(
-    SSNP_FRE ,  KC_F1   , KC_F2    , KC_F3   , KC_F4    , KC_F5    ,                                         KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   , KC_F11   ,
-    SSNP_VRT ,  _______ , _______  , KC_UP   , KC_ENT   , KC_DEL   ,                                         KC_PGUP  , KC_BTN1  , KC_UP    , KC_BTN2  , KC_BTN3  , KC_F12   ,
-    SSNP_HOR ,  _______ , KC_LEFT  , KC_DOWN , KC_RGHT  , KC_BSPC  ,                                         KC_PGDN  , KC_LEFT  , KC_DOWN  , KC_RGHT  , _______  , _______  ,
-                  _______  , _______ , _______  ,         _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+  [dvorak_mod] = LAYOUT_universal(
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+              _______ , _______           , _______ , _______  , _______ ,                 _______  , _______           , _______ , _______ , _______
   ),
 
-  [2] = LAYOUT_universal(
-    RGB_TOG  , AML_TO   , _______  , _______  , _______  , _______  ,                                        _______  , _______  , _______  , _______ , _______ , _______  ,
-    RGB_MOD  , _______  , _______  , _______  , _______  , _______ ,                                        _______  , _______  , _______  , _______ , _______  , _______  ,
-    RGB_RMOD , _______  , _______  , _______  , _______  , _______ ,                                        _______  , _______ , _______ , _______  , _______  , _______ ,
-                  _______  , _______  ,       _______  , _______  , _______  ,                   _______  , _______  , _______       , _______  , _______
+  [qwerty] = LAYOUT_universal(
+    KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , _______  ,
+    KC_LSFT  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
+               _______  , _______  , MO(qwerty_mod)  , KC_SPC , _______ ,                          KC_BSPC , KC_ENT   , _______  , _______  , KC_CONFIG_NAVIGATION
+  ),
+
+  [qwerty_mod] = LAYOUT_universal(
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+              _______ , _______           , _______ , _______  , _______ ,                 _______  , _______           , _______ , _______ , _______
+  ),
+
+  [gaming] = LAYOUT_universal(
+    KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_BTN1  , KC_BTN3  , KC_BTN4  , KC_BTN2  , _______  ,
+    KC_LSFT  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
+               _______  , _______  , MO(qwerty_mod)  , KC_SPC , _______ ,                          KC_BSPC , KC_ENT   , _______  , _______  , KC_CONFIG_NAVIGATION
+  ),
+
+  [gaming_mod] = LAYOUT_universal(
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+              _______ , _______           , _______ , _______  , _______ ,                 _______  , _______           , _______ , _______ , _______
   ),
 };
 // clang-format on
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Auto enable scroll mode when the highest layer is 2
-    keyball_set_scroll_mode(get_highest_layer(state) == 2);
+    switch(get_highest_layer(state))
+    {
+      case navigation_mod:
+      case dvorak_mod:
+      case qwerty_mod:
+      case gaming_mod:
+        keyball_set_scroll_mode(true);
+        break;
+      default:
+        keyball_set_scroll_mode(false);
+    }
     return state;
+}
+
+// Add the behaviour of this new keycode
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_CONFIG_NAVIGATION:
+    case KC_CONFIG_DVORAK:
+    case KC_CONFIG_QWERTY:
+    case KC_CONFIG_GAMING:
+      // Our logic will happen on presses, nothing is done on releases
+      if (!record->event.pressed) {
+        // We've already handled the keycode (doing nothing), let QMK know so no further code is run unnecessarily
+        return false;
+      }
+      layer_move(keycode << 1);
+      return false;
+
+    // Process other keycodes normally
+    default:
+      return true;
+  }
 }
 
 #ifdef OLED_ENABLE
