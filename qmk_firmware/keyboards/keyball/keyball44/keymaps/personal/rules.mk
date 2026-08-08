@@ -1,5 +1,3 @@
 RGBLIGHT_ENABLE = no
 
 OLED_ENABLE = yes
-
-LAYER_LOCK_ENABLE = yes
