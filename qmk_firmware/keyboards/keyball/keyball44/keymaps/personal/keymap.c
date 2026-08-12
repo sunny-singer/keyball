@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 #include "quantum.h"
+#include "features/layer_lock.h"
 
 // DEVNOTE https://keymapdb.com/keymaps/jwon/
 // https://pseudocc.github.io/real-prog-dvorak/
