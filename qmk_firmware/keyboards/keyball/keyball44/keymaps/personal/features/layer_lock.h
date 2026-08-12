@@ -66,8 +66,6 @@
 
 #pragma once
 
-#warning "DEPRECATION NOTICE: This implementation of Layer Lock is deprecated and will be removed from this repo on 2026-10-01. Layer Lock is now a core QMK feature. See <https://docs.qmk.fm/features/layer_lock>."
-
 #include "quantum.h"
 
 #ifdef __cplusplus
