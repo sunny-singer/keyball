@@ -35,6 +35,10 @@ enum my_layers {
   scroll
 };
 
+enum custom_keycodes {
+    C_KC_LLCK = KEYBALL_SAFE_RANGE
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default 
@@ -112,10 +116,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     }
     return state;
 }
-
-enum custom_keycodes {
-    C_KC_LLCK = KEYBALL_SAFE_RANGE
-};
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_layer_lock(keycode, record, C_KC_LLCK)) { return false; }
