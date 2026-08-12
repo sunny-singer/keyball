@@ -73,14 +73,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
     _______ , KC_1    , KC_2    , KC_3    , KC_4    , KC_5    ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
     _______ , KC_6    , KC_7    , KC_8    , KC_9    , KC_0    ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
-              _______ , _______           , _______ , _______ , _______ ,                   QK_LLCK , _______           , _______ , _______ , _______
+              _______ , _______           , _______ , _______ , _______ ,                 C_KC_LLCK , _______           , _______ , _______ , _______
   ),
 
   [navigation] = LAYOUT_universal(
     _______ , _______ , _______ , KC_UP   , _______ , _______ ,                                       _______ , TO(qwerty) , TO(dvorak) , TO(gaming) , _______ , _______ ,
     _______ , KC_LCTL , KC_LEFT , KC_DOWN , KC_RGHT , _______ ,                                       _______ , KC_RSFT , C(KC_X) , C(KC_C) , C(KC_V) , _______ ,
     _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , SSNP_VRT, SSNP_HOR, SSNP_FRE, AML_TO  , _______ ,
-              _______ , _______           , _______ , _______ , MO(scroll) ,                QK_LLCK , _______           , _______ , _______ , _______
+              _______ , _______           , _______ , _______ , MO(scroll) ,              C_KC_LLCK , _______           , _______ , _______ , _______
   ),
 
   [aml] = LAYOUT_universal(
@@ -111,6 +111,15 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         keyball_set_scroll_mode(false);
     }
     return state;
+}
+
+enum custom_keycodes {
+    C_KC_LLCK = KEYBALL_SAFE_RANGE
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_layer_lock(keycode, record, C_KC_LLCK)) { return false; }
+    return true;
 }
 
 #ifdef OLED_ENABLE
