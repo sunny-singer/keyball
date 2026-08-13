@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 #include "quantum.h"
+#include "features/layer_lock.h"
 
 // DEVNOTE https://keymapdb.com/keymaps/jwon/
 // https://pseudocc.github.io/real-prog-dvorak/
@@ -34,44 +35,48 @@ enum my_layers {
   scroll
 };
 
+enum custom_keycodes {
+    C_KC_LLCK = KEYBALL_SAFE_RANGE
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default 
   // TODO figure out scroll mode dilemma
 
   [qwerty] = LAYOUT_universal(
-    KC_TAB   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    KC_TAB   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_BSPC  ,
     KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_RSFT  ,
     KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
-               _______  , _______  , TT(navigation) , KC_SPC , TT(universal_mod) ,                 KC_BSPC , KC_ENT              , _______  , _______  , _______
+               _______  , _______  , MO(navigation) , KC_SPC , MO(universal_mod) ,                 _______ , KC_ENT              , _______  , _______  , _______
   ),
 
   [dvorak] = LAYOUT_universal(
-    KC_TAB   , KC_SCLN  , KC_COMM  , KC_DOT   , KC_P     , KC_Y     ,                                        KC_F     , KC_G     , KC_C     , KC_R     , KC_L     , _______  ,
+    KC_TAB   , KC_SCLN  , KC_COMM  , KC_DOT   , KC_P     , KC_Y     ,                                        KC_F     , KC_G     , KC_C     , KC_R     , KC_L     , KC_BSPC  ,
     KC_LSFT  , KC_A     , KC_O     , KC_E     , KC_U     , KC_I     ,                                        KC_D     , KC_H     , KC_T     , KC_N     , KC_S     , KC_RSFT  ,
     KC_LCTL  , KC_QUOTE , KC_Q     , KC_J     , KC_K     , KC_X     ,                                        KC_B     , KC_M     , KC_W     , KC_V     , KC_Z     , _______  ,
-               _______  , _______  , TT(navigation) , KC_SPC , TT(universal_mod) ,                 KC_BSPC , KC_ENT              , _______  , _______  , _______
+               _______  , _______  , MO(navigation) , KC_SPC , MO(universal_mod) ,                 _______ , KC_ENT              , _______  , _______  , _______
   ),
 
   [gaming] = LAYOUT_universal(
-    _______  , KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     ,                                 KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    _______  , KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     ,                                 KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , KC_BSPC  ,
     _______  , KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     ,                                 KC_H     , KC_BTN1  , LT(scroll, KC_BTN3) , KC_L     , KC_BTN2  , KC_RSFT  ,
     _______  , KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     ,                                 KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , KC_ENT   ,
-               _______  , _______  , _______  , KC_SPC   , TT(universal_mod) ,              KC_BSPC , KC_ENT              , _______  , _______  , TO(navigation)
+               _______  , _______  , _______  , KC_SPC   , MO(universal_mod) ,              _______ , KC_ENT              , _______  , _______  , TO(navigation)
   ),
 
   [navigation] = LAYOUT_universal(
     _______ , _______ , _______ , KC_UP   , _______ , _______ ,                                       _______ , TO(qwerty) , TO(dvorak) , TO(gaming) , _______ , _______ ,
     _______ , KC_LCTL , KC_LEFT , KC_DOWN , KC_RGHT , _______ ,                                       _______ , KC_RSFT , C(KC_C) , C(KC_V) , C(KC_X) , _______ ,
     _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , SSNP_VRT, SSNP_HOR, SSNP_FRE, AML_TO  , _______ ,
-              _______ , _______           , TG(navigation) , _______ , _______ ,            _______ , _______           , _______ , _______ , _______
+              _______ , _______           , _______ , _______ , _______ ,                 C_KC_LLCK , _______           , _______ , _______ , _______
   ),
 
   [universal_mod] = LAYOUT_universal(
     _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
     _______ , KC_1    , KC_2    , KC_3    , KC_4    , KC_5    ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
     _______ , KC_6    , KC_7    , KC_8    , KC_9    , KC_0    ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
-              _______ , _______           , _______ , _______ , TG(universal_mod) ,         _______ , _______           , _______ , _______ , _______
+              _______ , _______           , _______ , _______ , _______ ,                 C_KC_LLCK , _______           , _______ , _______ , _______
   ),
 
   [aml] = LAYOUT_universal(
@@ -101,6 +106,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         keyball_set_scroll_mode(false);
     }
     return state;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_layer_lock(keycode, record, C_KC_LLCK)) { return false; }
+    return true;
 }
 
 #ifdef OLED_ENABLE
