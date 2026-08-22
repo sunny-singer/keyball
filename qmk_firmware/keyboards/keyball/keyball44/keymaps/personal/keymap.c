@@ -44,24 +44,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // TODO figure out scroll mode dilemma
 
   [qwerty] = LAYOUT_universal(
-    KC_TAB   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                        KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
-    KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                        KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_RSFT  ,
-    KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                        KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
-               _______  , _______  , MO(navigation) , KC_SPC , MO(universal_mod) ,                 KC_BSPC , KC_ENT   , _______  , _______  , _______
+    KC_TAB   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                            KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_RSFT  ,
+    KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
+               _______  , _______  , KC_BSPC  , KC_SPC   , KC_ENT   ,                           MO(navigation) , MO(universal_mod)              , _______  , _______  , _______
   ),
 
   [dvorak] = LAYOUT_universal(
-    KC_TAB   , KC_SCLN  , KC_COMM  , KC_DOT   , KC_P     , KC_Y     ,                                        KC_F     , KC_G     , KC_C     , KC_R     , KC_L     , _______  ,
-    KC_LSFT  , KC_A     , KC_O     , KC_E     , KC_U     , KC_I     ,                                        KC_D     , KC_H     , KC_T     , KC_N     , KC_S     , KC_RSFT  ,
-    KC_LCTL  , KC_QUOTE , KC_Q     , KC_J     , KC_K     , KC_X     ,                                        KC_B     , KC_M     , KC_W     , KC_V     , KC_Z     , _______  ,
-               _______  , _______  , MO(navigation) , KC_SPC , MO(universal_mod) ,                 KC_BSPC , KC_ENT   , _______  , _______  , _______
+    KC_TAB   , KC_SCLN  , KC_COMM  , KC_DOT   , KC_P     , KC_Y     ,                                            KC_F     , KC_G     , KC_C     , KC_R     , KC_L     , _______  ,
+    KC_LSFT  , KC_A     , KC_O     , KC_E     , KC_U     , KC_I     ,                                            KC_D     , KC_H     , KC_T     , KC_N     , KC_S     , KC_RSFT  ,
+    KC_LCTL  , KC_QUOTE , KC_Q     , KC_J     , KC_K     , KC_X     ,                                            KC_B     , KC_M     , KC_W     , KC_V     , KC_Z     , _______  ,
+               _______  , _______  , KC_BSPC  , KC_SPC   , KC_ENT   ,                           MO(navigation) , MO(universal_mod)              , _______  , _______  , _______
   ),
 
   [gaming] = LAYOUT_universal(
-    _______  , KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     ,                                 KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
-    _______  , KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     ,                                 KC_H     , KC_BTN1  , LT(scroll, KC_BTN3) , KC_L     , KC_BTN2  , KC_RSFT  ,
-    _______  , KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     ,                                 KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
-               _______  , _______  , _______  , KC_SPC   , MO(universal_mod) ,              KC_BSPC , KC_ENT              , _______  , _______  , TO(navigation)
+    _______  , KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     ,                                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    _______  , KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     ,                                            KC_H     , KC_BTN1  , LT(scroll, KC_BTN3) , KC_L     , KC_BTN2  , KC_RSFT  ,
+    _______  , KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     ,                                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
+               _______  , _______  , KC_BSPC  , KC_SPC   , KC_ENT   ,                                  _______ , MO(universal_mod)              , _______  , _______  , TO(navigation)
   ),
 
   [universal_mod] = LAYOUT_universal(
@@ -73,8 +73,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [navigation] = LAYOUT_universal(
     _______ , _______ , C(KC_Z) , KC_UP   , C(KC_Y) , _______ ,                                       _______ , TO(qwerty) , TO(dvorak) , TO(gaming) , _______ , _______ ,
-    _______ , _______ , KC_LEFT , KC_DOWN , KC_RGHT , C(KC_V) ,                                     C_KC_LLCK , KC_BTN1 , LT(scroll, KC_BTN3) , KC_RSFT , KC_BTN2 , _______ ,
-    _______ , _______ , _______ , C(KC_X) , C(KC_C) , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , _______ , KC_LEFT , KC_DOWN , KC_RGHT , C(KC_V) ,                                     C_KC_LLCK , KC_BTN1 , LT(scroll, KC_BTN3) , KC_RSFT , KC_BTN2 , LALT(KC_TAB) ,
+    _______ , _______ , C(KC_S) , C(KC_X) , C(KC_C) , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
               _______ , _______           , _______ , _______ , KC_LCTL ,                   _______ , _______           , _______ , _______ , _______
   ),
 
