@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______  , KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     ,                                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
     _______  , KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     ,                                            KC_H     , KC_BTN1  , LT(scroll, KC_BTN3) , KC_L     , KC_BTN2  , KC_RSFT  ,
     _______  , KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     ,                                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
-               _______  , _______  , KC_BSPC  , KC_SPC   , MO(universal_mod)   ,                        KC_ENT , KC_RALT                        , _______  , _______  , TO(navigation)
+               _______  , _______  , KC_BSPC  , KC_SPC   , MO(universal_mod)   ,                        KC_ENT , KC_RALT                        , _______  , _______  , TG(navigation)
   ),
 
   [universal_mod] = LAYOUT_universal(
@@ -77,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______ , _______ , C(KC_Z) , KC_UP   , C(KC_Y) , _______ ,                                       _______ , DF(qwerty) , DF(dvorak) , DF(gaming) , _______ , _______ ,
     _______ , KC_LCTL , KC_LEFT , KC_DOWN , KC_RGHT , C(KC_V) ,                                     C_KC_LLCK , KC_BTN1 , LT(scroll, KC_BTN3) , KC_RSFT , KC_BTN2 , LALT(KC_TAB) ,
     _______ , _______ , C(KC_S) , C(KC_X) , C(KC_C) , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
-              _______ , _______           , KC_LALT , _______ , _______ ,                   _______ , _______           , _______ , _______ , _______
+              _______ , _______           , _______ , _______ , KC_LALT ,                   _______ , TG(navigation)    , _______ , _______ , _______
   ),
 
   [scroll] = LAYOUT_universal(
