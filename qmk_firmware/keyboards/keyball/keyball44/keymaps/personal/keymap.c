@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [gaming] = LAYOUT_universal(
-    KC_T     , KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     ,                                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    KC_ESC   , KC_T     , KC_Q     , KC_W     , KC_E     , KC_R     ,                                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
     KC_TAB   , KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     ,                                            KC_H     , KC_BTN1  , LT(scroll, KC_BTN3) , KC_L     , KC_BTN2  , KC_QUOTE ,
     KC_LCTL  , KC_B     , KC_Z     , KC_X     , KC_C     , KC_V     ,                                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
                _______  , _______  , KC_BSPC  , KC_SPC   , MO(universal_mod)   ,                       KC_RSFT , MO(navigation)      , _______  , _______  , LALT(KC_TAB) 
