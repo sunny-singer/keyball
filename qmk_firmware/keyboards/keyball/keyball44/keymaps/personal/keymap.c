@@ -37,47 +37,48 @@ enum my_layers {
 };
 
 enum custom_keycodes {
-    C_KC_LLCK = KEYBALL_SAFE_RANGE
+    C_KC_LLCK = KEYBALL_SAFE_RANGE,
+    C_KC_GON,
+    C_KC_GOFF
 };
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default 
-  // TODO switch default instead of toggle, try TT for navigation layer toggle
 
   [qwerty] = LAYOUT_universal(
     KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
-    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                            KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_ENT  ,
+    KC_TAB   , KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                                            KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  , KC_QUOTE ,
     KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
                _______  , _______  , KC_BSPC  , KC_SPC   , MO(universal_mod)   ,                       KC_RSFT , MO(navigation)      , _______  , _______  , LALT(KC_TAB) 
   ),
 
   [dvorak] = LAYOUT_universal(
     KC_ESC   , KC_SCLN  , KC_COMM  , KC_DOT   , KC_P     , KC_Y     ,                                            KC_F     , KC_G     , KC_C     , KC_R     , KC_L     , _______  ,
-    KC_TAB   , KC_A     , KC_O     , KC_E     , KC_U     , KC_I     ,                                            KC_D     , KC_H     , KC_T     , KC_N     , KC_S     , KC_ENT  ,
+    KC_TAB   , KC_A     , KC_O     , KC_E     , KC_U     , KC_I     ,                                            KC_D     , KC_H     , KC_T     , KC_N     , KC_S     , KC_QUOTE ,
     KC_LCTL  , KC_QUOTE , KC_Q     , KC_J     , KC_K     , KC_X     ,                                            KC_B     , KC_M     , KC_W     , KC_V     , KC_Z     , _______  ,
                _______  , _______  , KC_BSPC  , KC_SPC   , MO(universal_mod)   ,                       KC_RSFT , MO(navigation)      , _______  , _______  , LALT(KC_TAB) 
   ),
 
   [gaming] = LAYOUT_universal(
-    _______  , KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     ,                                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
-    _______  , KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     ,                                            KC_H     , KC_BTN1  , LT(scroll, KC_BTN3) , KC_L     , KC_BTN2  , _______  ,
-    _______  , KC_LCTL  , KC_Z     , KC_X     , KC_C     , KC_V     ,                                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
+    KC_T     , KC_ESC   , KC_Q     , KC_W     , KC_E     , KC_R     ,                                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     , _______  ,
+    KC_TAB   , KC_LSFT  , KC_A     , KC_S     , KC_D     , KC_F     ,                                            KC_H     , KC_BTN1  , LT(scroll, KC_BTN3) , KC_L     , KC_BTN2  , KC_QUOTE ,
+    KC_LCTL  , KC_B     , KC_Z     , KC_X     , KC_C     , KC_V     ,                                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  , _______  ,
                _______  , _______  , KC_BSPC  , KC_SPC   , MO(universal_mod)   ,                       KC_RSFT , MO(navigation)      , _______  , _______  , LALT(KC_TAB) 
   ),
 
   [universal_mod] = LAYOUT_universal(
     _______ , _______ , _______ , _______ , _______ , _______ ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
-    _______ , KC_1    , KC_2    , KC_3    , KC_4    , KC_5    ,                                     C_KC_LLCK , KC_BTN1 , _______ , _______ , KC_QUOTE , _______ ,
-    _______ , KC_6    , KC_7    , KC_8    , KC_9    , KC_0    ,                                       _______ , _______ , _______ , _______ , _______ , _______ ,
+    _______ , KC_1    , KC_2    , KC_3    , KC_4    , KC_5    ,                                       _______ , KC_BTN1 , _______ , _______ , _______ , KC_ENT  ,
+    _______ , KC_6    , KC_7    , KC_8    , KC_9    , KC_0    ,                                     C_KC_LLCK , _______ , _______ , _______ , _______ , _______ ,
               _______ , _______           , _______ , _______ , _______ ,                   _______ , _______           , _______ , _______ , _______
   ),
 
   [navigation] = LAYOUT_universal(
     _______ , _______ , C(KC_Z) , KC_UP   , C(KC_Y) , _______ ,                                       _______ , _______ , _______ , _______ , _______ , DF(qwerty) ,
-    _______ , KC_LCTL , KC_LEFT , KC_DOWN , KC_RGHT , C(KC_V) ,                                     C_KC_LLCK , KC_BTN1 , LT(scroll, KC_BTN3) , KC_RSFT , KC_BTN2 , DF(dvorak) ,
-    _______ , _______ , C(KC_S) , C(KC_X) , C(KC_C) , _______ ,                                       _______ , _______ , _______ , _______ , _______ , DF(gaming) ,
-              _______ , _______           , _______ , _______ , KC_LALT ,                   _______ , _______           , _______ , _______ , LALT(KC_TAB)
+    _______ , _______ , KC_LEFT , KC_DOWN , KC_RGHT , C(KC_V) ,                                      C_KC_GON , KC_RSFT , KC_LCTL , KC_LALT , _______ , C_KC_GOFF  ,
+    _______ , _______ , C(KC_S) , C(KC_X) , C(KC_C) , _______ ,                                     C_KC_LLCK , _______ , _______ , _______ , _______ , DF(dvorak) ,
+              _______ , _______           , _______ , _______ , _______ ,                   _______ , _______           , _______ , _______ , LALT(KC_TAB)
   ),
 
   [scroll] = LAYOUT_universal(
@@ -103,6 +104,16 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode)
+  {
+    case C_KC_GON:
+      layer_on(gaming);
+      return false;
+
+    case C_KC_GOFF:
+      layer_off(gaming);
+      return false;
+  }
     if (!process_layer_lock(keycode, record, C_KC_LLCK)) { return false; }
     return true;
 }
